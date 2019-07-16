@@ -19,7 +19,12 @@ public class TransactionEntries {
 	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
-	
-	
 
+	public TransactionEntries() {
+	}
+
+	public TransactionEntries(ZonedDateTime dateTime, Double quantity) {
+		this.dateTime = dateTime;
+		this.quantity = quantity;
+	}
 }

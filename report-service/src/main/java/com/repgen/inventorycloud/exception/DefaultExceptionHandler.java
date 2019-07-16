@@ -1,5 +1,8 @@
 package com.repgen.inventorycloud.exception;
 
+import com.repgen.inventorycloud.modal.ResponseMessages;
+import com.repgen.inventorycloud.modal.ResponseValues;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,65 +14,22 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-@RestController
 public class DefaultExceptionHandler extends ResponseEntityExceptionHandler{
 
 	public final String responseFailed = "Failed";
-	
-	 @Override
-	  protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-	      HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		 String message = "Please provide ";
-		
-			for (int i = 0; i < ex.getBindingResult().getAllErrors().size(); i++) {
-				
-				if(i == 0) {
-					message = message + ex.getBindingResult().getAllErrors().get(i).getDefaultMessage();
-				}else {
-					message = message +" & " + ex.getBindingResult().getAllErrors().get(i).getDefaultMessage() ;
-				}
-			}
-			ErrorMessage errorMessage = new ErrorMessage(message+".", responseFailed);
-			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
-	  } 
-	 
-	 @ExceptionHandler(MessageBodyConstraintViolationException.class)
-	  public final ResponseEntity<?> handleUserNotFoundException(MessageBodyConstraintViolationException ex) {
-		 ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), responseFailed);
-		 
-	    return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
-	  }
-	 
-	 public class ErrorMessage {
-			
-			private String response;
-			private String message; 
-	    	
-	    	public ErrorMessage() {
-	    		super();
-			}
-	    	public ErrorMessage(String message, String response) {
-	    		super();
-	    		this.message = message;
-	    		this.response = response;
-			}
+	@Autowired
+	ResponseValues responseValues;
 
-			public String getResponse() {
-				return response;
-			}
+	@Autowired
+	ResponseMessages responseMessages;
 
-			public void setResponse(String response) {
-				this.response = response;
-			}
+	@ExceptionHandler(MessageBodyConstraintViolationException.class)
+	public ResponseEntity<?> serviceException(MessageBodyConstraintViolationException e){
+		responseValues.setStatus(responseMessages.getResponseFailed());
+		responseValues.setMessage(e.getMessage());
+		responseValues.setCode("#1200003");
+		return new ResponseEntity<>(responseValues,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
-			public String getMessage() {
-				return message;
-			}
-
-			public void setMessage(String message) {
-				this.message = message;
-			}
-			
-		}
 }

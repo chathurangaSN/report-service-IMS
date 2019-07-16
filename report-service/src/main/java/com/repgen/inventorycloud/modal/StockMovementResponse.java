@@ -3,23 +3,14 @@ package com.repgen.inventorycloud.modal;
 import java.util.List;
 
 public class StockMovementResponse{
-  	 
-	
-	public String response;
-//	private String message;
-	public Stock stock;
-	
-	public List<TransactionLog> transactionLogsIssue;
-	
-	public List<TransactionLog> transactionLogsRecived;
 
-	public String getResponse() {
-		return response;
-	}
+	private String status;
+	private String message;
+	private String code;
+	private Stock stock;
+	private List<TransactionLog> transactionLogsIssue;
 
-	public void setResponse(String response) {
-		this.response = response;
-	}
+	private List<TransactionLog> transactionLogsRecived;
 
 	public Stock getStock() {
 		return stock;
@@ -45,6 +36,29 @@ public class StockMovementResponse{
 		this.transactionLogsRecived = transactionLogsRecived;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 	
 	
 	

@@ -48,9 +48,9 @@ public class CriticalStockServiceImpl implements CriticalStockService{
 		 for(int i = 0 ; i< getQuantity().length -1; i++) {
 			 
 			 for(int j =0 ; j<responseEntity.getBody().length - 1 ;j++) {
-				 if((getQuantity()[i].getItemId().longValue()==responseEntity.getBody()[j].getId()) &&
-						 (getQuantity()[i].getBrandId()==responseEntity.getBody()[j].getBrand().getId())
-						 && (getQuantity()[i].getUomId()==responseEntity.getBody()[j].getBrand().getId()))
+//				 if((getQuantity()[i].getItemId().longValue()==responseEntity.getBody()[j].getId()) &&
+//						 (getQuantity()[i].getBrandId()==responseEntity.getBody()[j].getBrand().getId())
+//						 && (getQuantity()[i].getUomId()==responseEntity.getBody()[j].getBrand().getId()))
 				 {
 					 if((getQuantity()[i].getQuantity())<responseEntity.getBody()[j].getCriticalLevel()) {
 						 

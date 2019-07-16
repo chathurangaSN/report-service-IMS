@@ -28,13 +28,13 @@ public class StockMovementController {
 		return builder.build();
 	}
 	
-	@RequestMapping(value = "/stockmoment/{itemId}", method = RequestMethod.GET) 
+	@RequestMapping(value = "/stockmoment/{itemCode}", method = RequestMethod.GET)
 	// fetch Stock Movement Report // /{brandId}/{itemId}/{uomId}
 	
-	public ResponseEntity<?> fetchStockMovement( @PathVariable Integer itemId ) { 
+	public ResponseEntity<?> fetchStockMovement( @PathVariable String itemCode ) {
 //			,@PathVariable Integer uomId, @PathVariable Integer brandId) { 
 		
-			return stockMovementServiceImpl.fetchdetails( itemId); // , uomId, brandId
+			return stockMovementServiceImpl.fetchDetails( itemCode); // , uomId, brandId
 
 	}
 	

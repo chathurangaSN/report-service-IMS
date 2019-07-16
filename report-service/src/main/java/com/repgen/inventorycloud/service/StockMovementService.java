@@ -7,7 +7,7 @@ import com.repgen.inventorycloud.modal.StockMovementDetails;
 
 public interface StockMovementService {
 
-	ResponseEntity<StockMovementDetails> fetchdetails(Integer itemId);// ,Integer uomId,Integer brandId
+	ResponseEntity<StockMovementDetails> fetchDetails(String itemCode);// ,Integer uomId,Integer brandId
 	
 	ResponseEntity<?> generateReport();
 }
