@@ -17,25 +17,25 @@ import javax.validation.constraints.Size;
 
 
 public class DraftLog {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id = 0;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id = 0;
 
-    ZonedDateTime date;
-    
-    
-    @NotNull(message = "valid user information")
-    @Min(value = 1 ,message="valid user information")
-    Integer userId;
-    
-    
-    @NotNull
-    @Size(min=1, message="a reason for the entry log")
-    String reason;
+	ZonedDateTime date;
 
-    @OneToMany(mappedBy = "draftLog", cascade = CascadeType.ALL)
-    List<DraftDetails> draftDetails;
+
+	@NotNull(message = "valid user information")
+	@Min(value = 1 ,message="valid user information")
+	Integer userId;
+
+
+	@NotNull
+	@Size(min=1, message="a reason for the entry log")
+	String reason;
+
+	@OneToMany(mappedBy = "draftLog", cascade = CascadeType.ALL)
+	List<DraftDetails> draftDetails;
 
 	public Integer getId() {
 		return id;
@@ -57,8 +57,19 @@ public class DraftLog {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserId(String userId) {
+		Integer usid = null;
+//		try {
+		usid = Integer.parseInt(userId);
+//        } catch (NumberFormatException e) {
+//        	System.out.println("String value passed");
+//           throw new  MessageBodyConstraintViolationException("String value passed");
+//        }
+//		if(usid == null) {
+//			System.out.println("String value passed 2");
+//	        throw new RuntimeException("Integer type parameter required");
+//		}
+		this.userId = usid;
 	}
 
 	public String getReason() {
@@ -77,7 +88,7 @@ public class DraftLog {
 		this.draftDetails = draftDetails;
 	}
 
-	
 
-    
+
+
 }

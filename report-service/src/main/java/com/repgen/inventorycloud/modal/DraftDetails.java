@@ -15,21 +15,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class DraftDetails {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+//
+//    @NotNull(message = "valid item information")
+//    @Min(value = 1 ,message="valid item information")
+//    Integer itemId;
 
-    Integer id;
-   
-    Integer itemId;
- 
-//    Integer uomId;
-//    
-//    
-//    Integer brandId;
+	@NotNull(message = "valid UOM information")
+	String batchId;
 
- 
-    Double quantity;
+	@NotNull(message = "valid brand information")
+	String itemCode;
 
-  
-    DraftLog draftLog;
+	@NotNull(message = "quantity")
+	@Min(value = 0 ,message="valid quantity")
+	Double quantity;
+
+	@ManyToOne
+	@JoinColumn(name = "OSid")
+	@JsonIgnore
+	DraftLog draftLog;
 
 	public Integer getId() {
 		return id;
@@ -38,14 +45,14 @@ public class DraftDetails {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Integer getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
+//
+//	public Integer getItemId() {
+//		return itemId;
+//	}
+//
+//	public void setItemId(Integer itemId) {
+//		this.itemId = itemId;
+//	}
 
 //	public Integer getUomId() {
 //		return uomId;
@@ -79,7 +86,23 @@ public class DraftDetails {
 		this.draftLog = draftLog;
 	}
 
-	
-	
-    
+	public String getBatchId() {
+		return batchId;
+	}
+
+	public void setBatchId(String batchId) {
+		this.batchId = batchId;
+	}
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+
+
+
 }

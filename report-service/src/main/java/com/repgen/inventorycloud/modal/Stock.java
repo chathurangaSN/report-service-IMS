@@ -17,23 +17,50 @@ import javax.validation.constraints.Size;
 public class Stock {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id = 0;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id = 0;
 
-    ZonedDateTime date;
-    
-    
-    @NotNull(message = "valid user information")
-    @Min(value = 1 ,message="valid user information")
-    Integer userId;
-    
-    
-    @NotNull
-    @Size(min=1, message="a reason for the entry log")
-    String reason;
+	ZonedDateTime date;
 
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
-    List<StockDetails> stockDetails;
+
+	@NotNull(message = "valid user information")
+	@Min(value = 1 ,message="valid user information")
+	Integer authorizedUserId;
+
+	Integer userId;
+
+	@NotNull
+	@Size(min=1, message="a reason for the entry log")
+	String reason;
+
+	@OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
+	List<StockDetails> stockDetails;
+
+	public Stock() {
+	}
+
+	public Stock(ZonedDateTime date,
+				 Integer authorizedUserId, Integer userId, String reason,
+				 List<StockDetails> stockDetails) {
+
+		this.date = date;
+		this.authorizedUserId = authorizedUserId;
+		this.userId = userId;
+		this.reason = reason;
+		this.stockDetails = stockDetails;
+	}
+
+	public Stock(Integer id, ZonedDateTime date,
+				 Integer authorizedUserId, Integer userId, String reason,
+				 List<StockDetails> stockDetails) {
+
+		this.id = id;
+		this.date = date;
+		this.authorizedUserId = authorizedUserId;
+		this.userId = userId;
+		this.reason = reason;
+		this.stockDetails = stockDetails;
+	}
 
 	public Integer getId() {
 		return id;
@@ -59,6 +86,14 @@ public class Stock {
 		this.userId = userId;
 	}
 
+	public Integer getAuthorizedUserId() {
+		return authorizedUserId;
+	}
+
+	public void setAuthorizedUserId(Integer authorizedUserId) {
+		this.authorizedUserId = authorizedUserId;
+	}
+
 	public String getReason() {
 		return reason;
 	}
@@ -74,6 +109,8 @@ public class Stock {
 	public void setStockDetails(List<StockDetails> stockDetails) {
 		this.stockDetails = stockDetails;
 	}
-    
-    
+
+
+
 }
+

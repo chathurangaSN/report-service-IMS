@@ -33,10 +33,11 @@ public class StockMovementResponseCommand extends HystrixCommand<StockMovementRe
 	protected StockMovementResponse run() throws Exception {
 		ResponseEntity<StockMovementResponse>responseEntity;
 		HttpEntity< String> entity = new HttpEntity<>("",httpHeaders);
-		responseEntity = restTemplate.exchange("http://stock-service/stock/openstock/master"
+		responseEntity = restTemplate.exchange("http://stock-service/stock/openstock/master/stockmovement/"
 				.concat(String.valueOf("/"+itemId)),HttpMethod.GET,entity,StockMovementResponse.class);
 		System.out.println("succes got details"); // "/"+brandId+"/"+itemId+"/"+uomId
 		return responseEntity.getBody();
 	};
+
 	
 }

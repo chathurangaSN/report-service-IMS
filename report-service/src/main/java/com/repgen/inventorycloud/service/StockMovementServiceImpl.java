@@ -126,7 +126,7 @@ public class StockMovementServiceImpl implements StockMovementService{
 	@Override
 	public ResponseEntity<?> generateReport() {
 		 ByteArrayInputStream bis = null;
-		 ResponseEntity<StockMovementDetails> details= fetchdetails(1, 1, 1);
+		 ResponseEntity<StockMovementDetails> details= fetchdetails(1);
 		 StockMovementDetails stockMovementDetails = details.getBody();
 			try {
 				bis = GeneratePdfReport.citiesReport(stockMovementDetails);
